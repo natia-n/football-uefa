@@ -1,0 +1,20 @@
+.table{
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.number, .tim, .content{
+    padding: 10px;
+}
+
+.number {
+    width: 30px;
+}
+
+.tim{
+    width: 250px;
+}
+
+.content{
+    width: 80px;
+}
