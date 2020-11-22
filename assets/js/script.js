@@ -1,7 +1,8 @@
 // პირველადი მონაცემები
 
-function Team (id, name, games, goalScored, missedGoal, points){
+function Team (id, image, name, games, goalScored, missedGoal, points){
     this.id = id;
+    this.image = image;
     this.name = name;
     this.games = games;
     this.goalScored = goalScored;
@@ -10,7 +11,8 @@ function Team (id, name, games, goalScored, missedGoal, points){
     this.points = points;    
 }
 
-function goalDifference(team) {
+//ფუნქცია არ წაიღო ლოცალ სტორიჯმა და მასივის ობიექტიდან ცალკე გამოვიტანე
+function goalDifference(team) { 
     return team.goalScored - team.missedGoal;
 }
 
@@ -18,18 +20,16 @@ let arrTeam = JSON.parse(localStorage.getItem("arrTeam"));
 
 if(arrTeam === null) {
     arrTeam = [
-        new Team(1, 'Real Madrid', 0, 0, 0, 0),
-        new Team(2, 'Barcelona', 0, 0, 0, 0),
-        new Team(3, 'Real Betis', 0, 0, 0, 0),
-        new Team(4, 'Sevilia', 0, 0, 0, 0),
-        new Team(5, 'Real Sosiedad', 0, 0, 0, 0),
-        new Team(6, 'Valencia', 0, 0, 0, 0)
+        new Team(1, "./assets/images/real-madrid.png", 'Real Madrid', 0, 0, 0, 0),
+        new Team(2, "./assets/images/barcelona.png", 'Barcelona', 0, 0, 0, 0),
+        new Team(3, "./assets/images/Real_betis.png", 'Real Betis', 0, 0, 0, 0),
+        new Team(4, "./assets/images/Sevilla.png", 'Sevilia', 0, 0, 0, 0),
+        new Team(5, "./assets/images/Real-Sociedad.png", 'Real Sosiedad', 0, 0, 0, 0),
+        new Team(6, "./assets/images/Valencia.png", 'Valencia', 0, 0, 0, 0)
     ];
     localStorage.setItem('arrTeam', JSON.stringify(arrTeam));   
 }
 
-
-// let notes = JSON.parse(localStorage.getItem("notes")) ?? [];
 // გამოთვლები
 
 const tBadi = document.getElementById('tbody');
@@ -45,17 +45,22 @@ function addTeam (){
     for(let i=0; i<arrTeam.length; i++){
         let newTeam = document.createElement('tr');
         let newNumber = document.createElement('td')
+        let newImage = document.createElement('td');
         let newName = document.createElement('td'); 
         let newGames = document.createElement('td'); 
         let newGoalDifference = document.createElement('td'); 
-        let newPoints = document.createElement('td'); 
+        let newPoints = document.createElement('td');
+        let image = document.createElement('img'); 
         tBadi.appendChild(newTeam);
         newTeam.appendChild(newNumber);
+        newTeam.appendChild(newImage);        
         newTeam.appendChild(newName);
         newTeam.appendChild(newGames);
         newTeam.appendChild(newGoalDifference);
         newTeam.appendChild(newPoints);
-        newNumber.textContent= i + 1;
+        newImage.appendChild(image);
+        image.setAttribute('src', arrTeam[i].image);        
+        newNumber.textContent= i + 1;        
         newName.textContent = arrTeam[i].name;
         newGames.textContent = + arrTeam[i].games;
         newGoalDifference.textContent = goalDifference(arrTeam[i]); //გამოვიძახეთ ფუნქია, თავიდან რომ გამოთვალოს
@@ -85,6 +90,11 @@ function gamesReport() {
     if (teamGoalScored1.value!=='' && teamGoalScored2.value!=='' && selectTeam1.value !== selectTeam2.value){ 
         let i = +selectTeam1.value;          
         let j = +selectTeam2.value;
+        teamGoalScored1.classList.add("hidden");
+        teamGoalScored2.classList.add("hidden");
+        buttonSend.classList.add("hidden");
+        selectTeam1.value = "";
+        selectTeam2.value = "";        
         game(i, j, +teamGoalScored1.value, +teamGoalScored2.value);       
     }
 } 
@@ -95,7 +105,9 @@ function game(team1Id, team2Id, team1Goal, team2Goal) {
     firstTeam.goalScored += team1Goal;   
     secondTeam.goalScored += team2Goal;  
     firstTeam.missedGoal += team2Goal;   
-    secondTeam.missedGoal += team1Goal;  
+    secondTeam.missedGoal += team1Goal; 
+    firstTeam.games++;  
+    secondTeam.games++;    
     if(team1Goal > team2Goal){
         firstTeam.points += 3;
     } else {
@@ -106,6 +118,8 @@ function game(team1Id, team2Id, team1Goal, team2Goal) {
             secondTeam.points += 1;
         }
     }
+    teamGoalScored1.value = '';
+    teamGoalScored2.value = '';
     insertionSort(arrTeam); 
     localStorage.setItem('arrTeam', JSON.stringify(arrTeam));   
     addTeam();
@@ -136,3 +150,19 @@ function insertionSort(arrTeam){
         }
     })
 }
+
+selectTeam1.addEventListener("change", () => {
+    selectTeam1.classList.remove("disabled");
+    teamGoalScored1.classList.remove("hidden");
+    if(selectTeam2.value !== ""){
+        buttonSend.classList.remove("hidden");
+    }
+});
+
+selectTeam2.addEventListener("change", () => {
+    selectTeam2.classList.remove("disabled");
+    teamGoalScored2.classList.remove("hidden");
+    if(selectTeam1.value !== ""){
+        buttonSend.classList.remove("hidden");
+    }
+});

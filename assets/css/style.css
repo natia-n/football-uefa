@@ -3,18 +3,90 @@
     margin-top: 30px;
 }
 
+.hidden {
+    visibility: hidden; /*მის ადგილას არის, მაგრამ არ ჩანს*/
+}
+
+.content{
+    text-align: center;
+    margin: 30px;
+}
+
+.content2{
+    text-align: center;
+    margin: 5px;
+}
+
+.content2 select, .content2 input{
+    margin: 10px;
+    padding: 5px;
+}
+
+.content2 select{
+    width: 200px;
+}
+
+.content2 select.disabled option{
+    color: black;
+}
+
+.content2 select.disabled option:first-child{
+    color: rgb(135, 136, 138);
+}
+
+.content2 select.disabled {
+    color: rgb(135, 136, 138);
+}
+
+.content2 input{
+    width: 100px;
+}
+
+
+.content .send{
+    margin: 10px;
+    width: 140px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+tbody tr{
+    border: 1px slategrey;
+    background-color:  rgb(243, 243, 243);
+} 
+
+ thead{
+    background-color: rgb(233, 232, 232);
+ }
+
 .number, .tim, .content{
-    padding: 10px;
+    padding: 10px;    
 }
 
 .number {
     width: 30px;
 }
 
+.logo {
+    width: 40px;
+}
+
 .tim{
     width: 250px;
 }
 
-.content{
+.header{
     width: 80px;
+}
+
+table img {
+    height: 30px; 
+}
+
+table tr td {
+    text-align: center;
+}
+
+table tr td:nth-child(3) {
+    text-align: left;
 }
