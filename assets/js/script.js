@@ -10,15 +10,26 @@ function Team (id, name, games, goalScored, missedGoal, points){
     this.points = points;    
 }
 
-const arrTeam = [
-    new Team(1, 'Real Madrid', 0, 0, 0, 0),
-    new Team(2, 'Barcelona', 0, 0, 0, 0),
-    new Team(3, 'Real Betis', 0, 0, 0, 0),
-    new Team(4, 'Sevilia', 0, 0, 0, 0),
-    new Team(5, 'Real Sosiedad', 0, 0, 0, 0),
-    new Team(6, 'Valencia', 0, 0, 0, 0)
-];
+function goalDifference(team) {
+    return team.goalScored - team.missedGoal;
+}
 
+let arrTeam = JSON.parse(localStorage.getItem("arrTeam"));
+
+if(arrTeam === null) {
+    arrTeam = [
+        new Team(1, 'Real Madrid', 0, 0, 0, 0),
+        new Team(2, 'Barcelona', 0, 0, 0, 0),
+        new Team(3, 'Real Betis', 0, 0, 0, 0),
+        new Team(4, 'Sevilia', 0, 0, 0, 0),
+        new Team(5, 'Real Sosiedad', 0, 0, 0, 0),
+        new Team(6, 'Valencia', 0, 0, 0, 0)
+    ];
+    localStorage.setItem('arrTeam', JSON.stringify(arrTeam));   
+}
+
+
+// let notes = JSON.parse(localStorage.getItem("notes")) ?? [];
 // გამოთვლები
 
 const tBadi = document.getElementById('tbody');
@@ -31,7 +42,6 @@ const teamGoalScored2 = document.getElementById('goalScored-2');
 addTeam();
 function addTeam (){
     tBadi.innerHTML = ""; //tBadi არსებული მონაცემები გავანულეთ
-    insertionSort(arrTeam); 
     for(let i=0; i<arrTeam.length; i++){
         let newTeam = document.createElement('tr');
         let newNumber = document.createElement('td')
@@ -48,8 +58,8 @@ function addTeam (){
         newNumber.textContent= i + 1;
         newName.textContent = arrTeam[i].name;
         newGames.textContent = + arrTeam[i].games;
-        newGoalDifference.textContent = + arrTeam[i].goalDifference(); //გამოვიძახეთ ფუნქია, თავიდან რომ გამოთვალოს
-        newPoints.textContent = + arrTeam[i].points;              
+        newGoalDifference.textContent = goalDifference(arrTeam[i]); //გამოვიძახეთ ფუნქია, თავიდან რომ გამოთვალოს
+        newPoints.textContent = + arrTeam[i].points;           
     }    
 }
 
@@ -64,14 +74,11 @@ function optionsTeam (){
         optionsTeam2.textContent = arrTeam[i].name;  
         optionsTeam1.value = arrTeam[i].id;
         optionsTeam2.value = arrTeam[i].id;
-        console.log(optionsTeam1.value);
     }    
 }
 
 buttonSend.addEventListener('click', () => {
     gamesReport()
-    console.log(event.target.tagName);
-    console.log(arrTeam);
 });
 
 function gamesReport() {
@@ -85,9 +92,10 @@ function gamesReport() {
 function game(team1Id, team2Id, team1Goal, team2Goal) {
     let firstTeam = arrTeam.find(team => team.id === team1Id); //გადაყვება სიმრავლეს და პირველივე ნაპოვნ team დააბრუნებს
     let secondTeam = arrTeam.find(team => team.id === team2Id);
-    console.log(firstTeam, secondTeam);
     firstTeam.goalScored += team1Goal;   
     secondTeam.goalScored += team2Goal;  
+    firstTeam.missedGoal += team2Goal;   
+    secondTeam.missedGoal += team1Goal;  
     if(team1Goal > team2Goal){
         firstTeam.points += 3;
     } else {
@@ -97,7 +105,9 @@ function game(team1Id, team2Id, team1Goal, team2Goal) {
             firstTeam.points += 1;
             secondTeam.points += 1;
         }
-    }   
+    }
+    insertionSort(arrTeam); 
+    localStorage.setItem('arrTeam', JSON.stringify(arrTeam));   
     addTeam();
 }
 
@@ -109,10 +119,10 @@ function insertionSort(arrTeam){
             if(b.points > a.points) {
                 return 1;
             } else {
-                if (a.goalDifference()>b.goalDifference()){
+                if (goalDifference(a)>goalDifference(b)){
                     return -1;
                 }else{
-                    if(a.goalDifference()<b.goalDifference()){
+                    if(goalDifference(a)<goalDifference(b)){
                         return 1;
                     }else{
                         if(a.goalScored>b.goalScored){
