@@ -90,3 +90,8 @@ table tr td {
 table tr td:nth-child(3) {
     text-align: left;
 }
+
+.laliga{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
