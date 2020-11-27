@@ -42,7 +42,6 @@
     width: 100px;
 }
 
-
 .content .send{
     margin: 10px;
     width: 140px;
@@ -93,5 +92,51 @@ table tr td:nth-child(3) {
 
 .laliga{
     background-color: rgb(255, 255, 255);
-    padding: 10px;
+    padding: 5px;
+}
+
+.menu{
+    margin: 0 auto;
+    width: 95%;
+    border-bottom: 2px solid;
+    text-align: center;
+}
+
+.menu button{
+    width: 100px;
+    margin: 10px;
+    padding: 5px;
+    background-color: white;
+}
+
+button, select, input{
+    border-radius: 8px;
+}
+
+.nawTournsment{
+    margin: 0 auto;
+    text-align: center;
+    width: 95%;
+}
+
+.nawTournsment button{
+    width: 150px;
+    margin: 10px;
+    padding: 5px;
+    background-color: white;
+}
+
+/* js */
+
+.hide{
+    display: none;
+}
+
+.teams input{
+    padding: 5px;
+    margin: 10px;
+}
+
+.teams {
+    list-style: none;
 }

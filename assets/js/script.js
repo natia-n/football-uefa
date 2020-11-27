@@ -1,6 +1,19 @@
 // პირველადი მონაცემები
 
-function Team (id, image, name, games, goalScored, missedGoal, points){
+const tBadi = document.getElementById('tbody');
+const selectTeam1 = document.getElementById('team1');
+const selectTeam2 = document.getElementById('team2');
+const buttonSend = document.getElementById('send');
+const teamGoalScored1 = document.getElementById('goalScored-1');
+const teamGoalScored2 = document.getElementById('goalScored-2');
+const buttonNawTournament = document.getElementById('nawTournament');
+const divStart = document.getElementById('start');
+const buttonStart = document.getElementById('buttonStart');
+const ulTeams = document.getElementById('teams');
+const saveTournament = document.querySelector(".saveTurnament");
+let teamAdd = document.getElementById('teamAdd');
+
+function Team (id, image, name, games = 0, goalScored = 0, missedGoal = 0, points = 0){
     this.id = id;
     this.image = image;
     this.name = name;
@@ -19,27 +32,16 @@ function goalDifference(team) {
 let arrTeam = JSON.parse(localStorage.getItem("arrTeam"));
 
 if(arrTeam === null) {
-    arrTeam = [
-        new Team(1, "./assets/images/real-madrid.png", 'Real Madrid', 0, 0, 0, 0),
-        new Team(2, "./assets/images/barcelona.png", 'Barcelona', 0, 0, 0, 0),
-        new Team(3, "./assets/images/Real_betis.png", 'Real Betis', 0, 0, 0, 0),
-        new Team(4, "./assets/images/Sevilla.png", 'Sevilia', 0, 0, 0, 0),
-        new Team(5, "./assets/images/Real-Sociedad.png", 'Real Sosiedad', 0, 0, 0, 0),
-        new Team(6, "./assets/images/Valencia.png", 'Valencia', 0, 0, 0, 0)
-    ];
-    localStorage.setItem('arrTeam', JSON.stringify(arrTeam));   
+    arrTeam = [];  
+} else {
+    saveTournament.classList.remove("hide");
+    buttonNawTournament.classList.add("hide");
+    addTeam();
+    optionsTeam();
 }
 
 // გამოთვლები
 
-const tBadi = document.getElementById('tbody');
-const selectTeam1 = document.getElementById('team1');
-const selectTeam2 = document.getElementById('team2');
-const buttonSend = document.getElementById('send');
-const teamGoalScored1 = document.getElementById('goalScored-1');
-const teamGoalScored2 = document.getElementById('goalScored-2');
-
-addTeam();
 function addTeam (){
     tBadi.innerHTML = ""; //tBadi არსებული მონაცემები გავანულეთ
     for(let i=0; i<arrTeam.length; i++){
@@ -68,7 +70,6 @@ function addTeam (){
     }    
 }
 
-optionsTeam ()
 function optionsTeam (){
     for(let i=0; i<arrTeam.length; i++){
         const optionsTeam1 = document.createElement('option'); 
@@ -166,3 +167,44 @@ selectTeam2.addEventListener("change", () => {
         buttonSend.classList.remove("hidden");
     }
 });
+
+//
+
+
+buttonNawTournament.addEventListener('click', teamsAdd);
+function teamsAdd(){
+    buttonNawTournament.classList.add('hide');
+    divStart.classList.remove('hide');
+    createInput();
+}
+
+function createInput(){
+    let li = document.createElement('li');
+    let input = document.createElement('input');
+    ulTeams.appendChild(li);
+    li.appendChild(input);    
+}
+
+teamAdd.addEventListener('click', createInput);   
+
+buttonStart.addEventListener('click', startTeam);
+
+function startTeam(){
+    const inputs = ulTeams.querySelectorAll("input");
+    inputs.forEach((el, index) =>{
+        let value = el.value.trim();
+        if(value){
+            arrTeam.push(new Team(index + 1, "./assets/images/real-madrid.png", value));
+        }
+    });
+    if(arrTeam.length<4){
+        alert('please enter at least 4 teams');
+        arrTeam = [];
+        return;
+    }
+    localStorage.setItem('arrTeam', JSON.stringify(arrTeam));
+    addTeam();
+    optionsTeam();
+    saveTournament.classList.remove('hide');
+    divStart.classList.add('hide');
+}
