@@ -8,13 +8,14 @@
 </head>
 <body>
     <div class="menu">
-        <button>Home</button>
-        <button>History</button>
+        <a href="#" class="active">Home</a>
+        <a href="./history.html">History</a>
     </div>        
     <div class="nawTournsment">
-        <button id="nawTournament">Naw Tournament</button>
+        <button id="nawTournament">Naw Tournament</button>       
         <div class="start hide" id="start">
             <button id="buttonStart">Start</button>
+            <input type="text" class="laliga" placeholder="Tournament name" id="nameTournament">
             <br/>
             <ul class="teams" id="teams">
             </ul>
@@ -23,12 +24,9 @@
     </div>
 
     <div class="saveTurnament hide">
-        <div>
+        <div>            
             <table border="0" class="table">
-                <thead>
-                    <tr>
-                        <th colspan="2" class="laliga">La Liga</th>
-                    </tr>
+                <thead>                   
                     <tr>            
                         <th class="number">#</th>
                         <th class="logo">Logo</th>
@@ -48,15 +46,18 @@
                 <select name="" id="team1" class="disabled">
                     <option value="" disabled selected>Team 1</option>
                 </select>
-                <input type="number" id="goalScored-1" name="goalScored-1" placeholder="Goal scored" class="hidden">
+                <input type="number" id="goalScored-1" min="0" name="goalScored-1" placeholder="Goal scored" class="hidden">
             </div>
             <div class="content2">            
                 <select name="" id="team2" class="disabled">
                     <option value="" disabled selected>Team 2</option>
                 </select> 
-                <input type="number" id="goalScored-2" name="goalScored-2" placeholder="Goal scored" class="hidden"> 
-            </div>   
+                <input type="number" id="goalScored-2" min="0" name="goalScored-2" placeholder="Goal scored" class="hidden"> 
+            </div>              
             <input type="submit" value="Send" id="send" class="send hidden">
+            <div class="content2">
+                <button id="saveAddTournament">Add Tournament</button>
+            </div>
         </div>    
     </div>
     

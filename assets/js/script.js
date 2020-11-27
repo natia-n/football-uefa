@@ -11,7 +11,10 @@ const divStart = document.getElementById('start');
 const buttonStart = document.getElementById('buttonStart');
 const ulTeams = document.getElementById('teams');
 const saveTournament = document.querySelector(".saveTurnament");
+const nameTournamnt = document.getElementById('nameTournament');
+const saveAddTournament = document.getElementById('saveAddTournament');
 let teamAdd = document.getElementById('teamAdd');
+let tournamentName = localStorage.getItem("tour-name");
 
 function Team (id, image, name, games = 0, goalScored = 0, missedGoal = 0, points = 0){
     this.id = id;
@@ -21,7 +24,7 @@ function Team (id, image, name, games = 0, goalScored = 0, missedGoal = 0, point
     this.goalScored = goalScored;
     this.missedGoal = missedGoal; 
     this.goalDifference = function(){return this.goalScored - this.missedGoal};
-    this.points = points;    
+    this.points = points;
 }
 
 //ფუნქცია არ წაიღო ლოცალ სტორიჯმა და მასივის ობიექტიდან ცალკე გამოვიტანე
@@ -88,7 +91,7 @@ buttonSend.addEventListener('click', () => {
 });
 
 function gamesReport() {
-    if (teamGoalScored1.value!=='' && teamGoalScored2.value!=='' && selectTeam1.value !== selectTeam2.value){ 
+    if (teamGoalScored1.value >= 0  && teamGoalScored2.value >= 0 && selectTeam1.value !== selectTeam2.value){ 
         let i = +selectTeam1.value;          
         let j = +selectTeam2.value;
         teamGoalScored1.classList.add("hidden");
@@ -172,9 +175,12 @@ selectTeam2.addEventListener("change", () => {
 
 
 buttonNawTournament.addEventListener('click', teamsAdd);
+
 function teamsAdd(){
     buttonNawTournament.classList.add('hide');
     divStart.classList.remove('hide');
+    nameTournamnt.classList.remove('hide');
+
     createInput();
 }
 
@@ -190,6 +196,12 @@ teamAdd.addEventListener('click', createInput);
 buttonStart.addEventListener('click', startTeam);
 
 function startTeam(){
+    tournamentName = nameTournamnt.value.trim();
+    if(tournamentName === ''){
+        alert('please add tournament name');
+        return;
+    }
+    localStorage.setItem('tour-name', tournamentName);
     const inputs = ulTeams.querySelectorAll("input");
     inputs.forEach((el, index) =>{
         let value = el.value.trim();
@@ -202,9 +214,35 @@ function startTeam(){
         arrTeam = [];
         return;
     }
+    ulTeams.innerHTML = "";
+    nameTournamnt.value = "";
     localStorage.setItem('arrTeam', JSON.stringify(arrTeam));
     addTeam();
     optionsTeam();
     saveTournament.classList.remove('hide');
     divStart.classList.add('hide');
+}
+
+// meore tabi
+
+function Tournaments (name, arr){
+    this.name = name;
+    this.arr = arr;    
+}
+
+let arrTournaments = JSON.parse(localStorage.getItem("arrTournaments"));
+if(arrTournaments === null){
+    arrTournaments = [];
+}
+
+localStorage.setItem('arrTournaments', JSON.stringify(arrTournaments));  
+saveAddTournament.addEventListener('click', tournamentSave);
+
+function tournamentSave(){
+    arrTournaments.push(new Tournaments(tournamentName, arrTeam));
+    localStorage.setItem('arrTournaments', JSON.stringify(arrTournaments)); 
+    localStorage.removeItem("arrTeam");
+    arrTeam = [];
+    saveTournament.classList.add("hide");
+    buttonNawTournament.classList.remove("hide");
 }

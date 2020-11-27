@@ -1,6 +1,6 @@
 .table{
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 .hidden {
@@ -93,6 +93,7 @@ table tr td:nth-child(3) {
 .laliga{
     background-color: rgb(255, 255, 255);
     padding: 5px;
+    margin: 0 auto;
 }
 
 .menu{
@@ -102,11 +103,20 @@ table tr td:nth-child(3) {
     text-align: center;
 }
 
-.menu button{
+.menu a{
     width: 100px;
     margin: 10px;
     padding: 5px;
-    background-color: white;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.menu a.active {
+    color: coral;
+    border-color: coral;
 }
 
 button, select, input{
@@ -140,3 +150,10 @@ button, select, input{
 .teams {
     list-style: none;
 }
+
+.saveTurnament {
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+}
+
