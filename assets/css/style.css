@@ -79,7 +79,8 @@ tbody tr{
 }
 
 table img {
-    height: 30px; 
+    height: 25px; 
+    
 }
 
 table tr td {
@@ -123,13 +124,13 @@ button, select, input{
     border-radius: 8px;
 }
 
-.nawTournsment{
+.newTournsment{
     margin: 0 auto;
     text-align: center;
     width: 95%;
 }
 
-.nawTournsment button{
+.newTournsment button{
     width: 150px;
     margin: 10px;
     padding: 5px;
@@ -157,3 +158,25 @@ button, select, input{
     margin: 10px;
 }
 
+.start{
+    text-align: center;
+}
+
+.start input{
+    padding: 5px;
+    margin-top: 10px;
+}
+
+h2{
+    text-align: center;
+}
+
+.finishTournnament{
+    padding: 5px;
+    margin: 10px;
+    width: 183px;
+}
+
+.teams li input{
+    width: 150px;
+}

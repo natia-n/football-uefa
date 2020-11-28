@@ -6,7 +6,7 @@ const selectTeam2 = document.getElementById('team2');
 const buttonSend = document.getElementById('send');
 const teamGoalScored1 = document.getElementById('goalScored-1');
 const teamGoalScored2 = document.getElementById('goalScored-2');
-const buttonNawTournament = document.getElementById('nawTournament');
+const buttonNewTournament = document.getElementById('newTournament');
 const divStart = document.getElementById('start');
 const buttonStart = document.getElementById('buttonStart');
 const ulTeams = document.getElementById('teams');
@@ -38,7 +38,7 @@ if(arrTeam === null) {
     arrTeam = [];  
 } else {
     saveTournament.classList.remove("hide");
-    buttonNawTournament.classList.add("hide");
+    buttonNewTournament.classList.add("hide");
     addTeam();
     optionsTeam();
 }
@@ -174,10 +174,10 @@ selectTeam2.addEventListener("change", () => {
 //
 
 
-buttonNawTournament.addEventListener('click', teamsAdd);
+buttonNewTournament.addEventListener('click', teamsAdd);
 
 function teamsAdd(){
-    buttonNawTournament.classList.add('hide');
+    buttonNewTournament.classList.add('hide');
     divStart.classList.remove('hide');
     nameTournamnt.classList.remove('hide');
 
@@ -206,7 +206,7 @@ function startTeam(){
     inputs.forEach((el, index) =>{
         let value = el.value.trim();
         if(value){
-            arrTeam.push(new Team(index + 1, "./assets/images/real-madrid.png", value));
+            arrTeam.push(new Team(index + 1, "./assets/images/images.jpg", value));
         }
     });
     if(arrTeam.length<4){
@@ -244,5 +244,5 @@ function tournamentSave(){
     localStorage.removeItem("arrTeam");
     arrTeam = [];
     saveTournament.classList.add("hide");
-    buttonNawTournament.classList.remove("hide");
+    buttonNewTournament.classList.remove("hide");
 }
