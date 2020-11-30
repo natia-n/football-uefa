@@ -53,13 +53,17 @@
     font-size: 14px;
 }
 
+.send{
+    background-color: white;
+}
+
 tbody tr{
     border: 1px slategrey;
-    background-color:  rgb(243, 243, 243);
+    background-color: #ff7f5040;
 } 
 
  thead{
-    background-color: rgb(233, 232, 232);
+    background-color: #ff7f5059
  }
 
 .number, .tim, .content{
@@ -89,6 +93,11 @@ table img {
 
 table tr td {
     text-align: center;
+    border-radius: 5px;
+}
+
+table tr th {
+    border-radius: 5px;
 }
 
 table tr td:nth-child(3) {
@@ -127,7 +136,8 @@ table tr td:nth-child(3) {
 
 button, select, input{
     border-radius: 20px;
-
+    color: coral;
+    border-color: coral;
 }
 
 .newTournsment{
@@ -198,6 +208,9 @@ h2{
 
 button{
     cursor: pointer;
+    color: coral;
+    border-color: coral;
+    background-color: white;
 }
 
 button:focus{

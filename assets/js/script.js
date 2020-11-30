@@ -87,7 +87,7 @@ buttonSend.addEventListener('click', () => {
 });
 
 function gamesReport() {
-    if (teamGoalScored1.value >= 0  && teamGoalScored2.value >= 0 && selectTeam1.value !== selectTeam2.value){ 
+    if (teamGoalScored1.value >= 0  && teamGoalScored2.value >= 0 && teamGoalScored1.value !==''  && teamGoalScored2.value !== 0 &&  selectTeam1.value !== selectTeam2.value){ 
         let i = +selectTeam1.value;          
         let j = +selectTeam2.value;
         teamGoalScored1.classList.add("hidden");
@@ -204,7 +204,7 @@ function startTeam(){
             arrTeam.push(new Team(index + 1, "./assets/images/ball.png", value));
         }
     });
-    if(arrTeam.length<4){
+    if(arrTeam.length < 4){
         alert('please enter at least 4 teams');
         arrTeam = [];
         return;
