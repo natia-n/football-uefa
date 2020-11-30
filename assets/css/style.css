@@ -3,6 +3,10 @@
     margin-top: 5px;
 }
 
+*{
+    margin: 0px;
+}
+
 .hidden {
     visibility: hidden; /*მის ადგილას არის, მაგრამ არ ჩანს*/
 }
@@ -59,7 +63,7 @@ tbody tr{
  }
 
 .number, .tim, .content{
-    padding: 10px;    
+    padding: 15px;    
 }
 
 .number {
@@ -67,7 +71,7 @@ tbody tr{
 }
 
 .logo {
-    width: 40px;
+    width: 50px;
 }
 
 .tim{
@@ -89,6 +93,7 @@ table tr td {
 
 table tr td:nth-child(3) {
     text-align: left;
+    padding-left: 10px;
 }
 
 .laliga{
@@ -121,7 +126,8 @@ table tr td:nth-child(3) {
 }
 
 button, select, input{
-    border-radius: 8px;
+    border-radius: 20px;
+
 }
 
 .newTournsment{
@@ -167,8 +173,17 @@ button, select, input{
     margin-top: 10px;
 }
 
+input:focus{
+   outline: none;
+}
+
+select:focus{
+    outline: none;
+ }
+
 h2{
     text-align: center;
+    margin-top: 20px;
 }
 
 .finishTournnament{
@@ -179,4 +194,12 @@ h2{
 
 .teams li input{
     width: 150px;
+}
+
+button{
+    cursor: pointer;
+}
+
+button:focus{
+    outline: none;
 }

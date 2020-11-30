@@ -1,5 +1,3 @@
-// პირველადი მონაცემები
-
 const tBadi = document.getElementById('tbody');
 const selectTeam1 = document.getElementById('team1');
 const selectTeam2 = document.getElementById('team2');
@@ -27,7 +25,7 @@ function Team (id, image, name, games = 0, goalScored = 0, missedGoal = 0, point
     this.points = points;
 }
 
-//ფუნქცია არ წაიღო ლოცალ სტორიჯმა და მასივის ობიექტიდან ცალკე გამოვიტანე
+//ფუნქცია არ წაიღო localStorage და მასივის ობიექტიდან ცალკე გამოვიტანე
 function goalDifference(team) { 
     return team.goalScored - team.missedGoal;
 }
@@ -42,8 +40,6 @@ if(arrTeam === null) {
     addTeam();
     optionsTeam();
 }
-
-// გამოთვლები
 
 function addTeam (){
     tBadi.innerHTML = ""; //tBadi არსებული მონაცემები გავანულეთ
@@ -171,16 +167,13 @@ selectTeam2.addEventListener("change", () => {
     }
 });
 
-//
-
-
 buttonNewTournament.addEventListener('click', teamsAdd);
 
 function teamsAdd(){
     buttonNewTournament.classList.add('hide');
     divStart.classList.remove('hide');
     nameTournamnt.classList.remove('hide');
-
+    
     createInput();
 }
 
@@ -188,7 +181,9 @@ function createInput(){
     let li = document.createElement('li');
     let input = document.createElement('input');
     ulTeams.appendChild(li);
-    li.appendChild(input);    
+    li.appendChild(input);  
+    input.placeholder = 'Team name' 
+    input.focus();
 }
 
 teamAdd.addEventListener('click', createInput);   
@@ -196,7 +191,7 @@ teamAdd.addEventListener('click', createInput);
 buttonStart.addEventListener('click', startTeam);
 
 function startTeam(){
-    tournamentName = nameTournamnt.value.trim();
+    tournamentName = nameTournamnt.value.trim(); //მოაშორა სფეისები
     if(tournamentName === ''){
         alert('please add tournament name');
         return;
@@ -206,7 +201,7 @@ function startTeam(){
     inputs.forEach((el, index) =>{
         let value = el.value.trim();
         if(value){
-            arrTeam.push(new Team(index + 1, "./assets/images/images.jpg", value));
+            arrTeam.push(new Team(index + 1, "./assets/images/ball.png", value));
         }
     });
     if(arrTeam.length<4){
@@ -223,7 +218,7 @@ function startTeam(){
     divStart.classList.add('hide');
 }
 
-// meore tabi
+// მეორე ტაბის მონაცემები
 
 function Tournaments (name, arr){
     this.name = name;
